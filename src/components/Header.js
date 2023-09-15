@@ -1,11 +1,11 @@
 function Header(){
     return(
         <head>
-            <meta charset="UTF-8"></meta>
-            <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
-            <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-            <link rel="stylesheet" href="style/style.css"></link>
-            <title>Register</title>
+            <meta charset="utf-8"></meta>
+            <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+            <title>Modernize Free</title>
+            <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
+            <link rel="stylesheet" href="../assets/css/styles.min.css" />
         </head>
     )
 

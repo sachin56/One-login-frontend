@@ -1,0 +1,75 @@
+import Header from "../components/Header";
+import React from 'react';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+
+function Register(){
+    const [apiError, setApiError] = useState(null);
+    const {
+        handleSubmit,
+    } = useForm();
+
+    const onSubmit = async (form_data) => {
+        try {
+            const { data } = await axios({
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                url: 'http://localhost:8080/api/v1/users/saveUser',
+                data: JSON.stringify(form_data)
+            });
+            console.log(data.code);
+    
+        }
+        catch (err) {
+            setApiError('Some error occured during registration');
+            //  console.log('Some error occured during signing in: ', err);
+        }
+    };
+    return(
+        <React.Fragment>
+           <Header />
+           <aside class="left-sidebar">
+                <div>
+                    <div class="brand-logo d-flex align-items-center justify-content-between">
+                        <a href="./index.html" class="text-nowrap logo-img">
+                            <img src="../assets/images/logos/dark-logo.svg" width="180" alt="" />
+                        </a>
+                        <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+                            <i class="ti ti-x fs-8"></i>
+                        </div>
+                    </div>
+            
+                    <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+                    <ul id="sidebarnav">
+                        <li class="nav-small-cap">
+                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                        <span class="hide-menu">Home</span>
+                        </li>
+                        <li class="sidebar-item">
+                        <a class="sidebar-link" href="./index.html" aria-expanded="false">
+                            <span>
+                            <i class="ti ti-layout-dashboard"></i>
+                            </span>
+                            <span class="hide-menu">Dashboard</span>
+                        </a>
+                        </li>
+                    </ul>
+                    </nav>
+
+                </div>
+            </aside>
+            <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+            <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="../assets/js/sidebarmenu.js"></script>
+            <script src="../assets/js/app.min.js"></script>
+            <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+            <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
+            <script src="../assets/js/dashboard.js"></script>
+      </React.Fragment>
+    )
+
+}
+export default Register;
