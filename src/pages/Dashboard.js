@@ -8,9 +8,9 @@ function Dashboard(){
     return(
         <React.Fragment>
            <Header />
-           <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"data-sidebar-position="fixed" data-header-position="fixed">
-           <Nav/>
-                <div class="body-wrapper">
+            <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"data-sidebar-position="fixed" data-header-position="fixed">
+            <Nav/>
+            <div class="body-wrapper">
                 <div class="container-fluid">
                     <div class="row">
                     <div class="col-sm-6 col-xl-3">
@@ -96,7 +96,7 @@ function Dashboard(){
                     </div>
                     
                 </div>
-                </div>
+            </div>
             </div>
             <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
             <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -105,7 +105,7 @@ function Dashboard(){
             <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
             <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
             <script src="../assets/js/dashboard.js"></script>
-            <Footer />
+            {/* <Footer /> */}
       </React.Fragment>
     )
 

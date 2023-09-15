@@ -4,30 +4,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
-function Register(){
-    const [apiError, setApiError] = useState(null);
-    const {
-        handleSubmit,
-    } = useForm();
-
-    const onSubmit = async (form_data) => {
-        try {
-            const { data } = await axios({
-                method: 'post',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                url: 'http://localhost:8080/api/v1/users/saveUser',
-                data: JSON.stringify(form_data)
-            });
-            console.log(data.code);
-    
-        }
-        catch (err) {
-            setApiError('Some error occured during registration');
-            //  console.log('Some error occured during signing in: ', err);
-        }
-    };
+function Navigation(){
     return(
         <React.Fragment>
            <Header />
@@ -72,4 +49,4 @@ function Register(){
     )
 
 }
-export default Register;
+export default Navigation;
