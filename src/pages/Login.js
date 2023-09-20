@@ -2,32 +2,45 @@ import Header from "../components/Header";
 import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { useNavigate } from "react-router-dom";
+
 
 function Login(){
-    const [apiError, setApiError] = useState(null);
-    const {
-        handleSubmit,
-    } = useForm();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
-    const onSubmit = async (form_data) => {
-        try {
-            const { data } = await axios({
-                method: 'post',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                url: 'http://localhost:8080/api/v1/users/saveUser',
-                data: JSON.stringify(form_data)
-            });
-            console.log(data.code);
+    async function login(event) {
+      event.preventDefault();
+      try {
+        await axios.post("http://localhost:8080/api/v1/employee/login", {
+          email: email,
+          password: password,
+          }).then((res) => 
+              {
+              console.log(res.data);
+              
+              if (res.data.message == "Email not exits") 
+              {
+                alert("Email not exits");
+              } 
+              else if(res.data.message == "Login Success")
+              { 
+                  navigate('/dashboard');                 
+              } 
+                else 
+              { 
+                  alert("Incorrect Email and Password not match");
+              }
+            }, fail => {
+            console.error(fail); // Error!
+          });
+      }catch (err) {
+        alert(err);
+      }
     
-        }
-        catch (err) {
-            setApiError('Some error occured during registration');
-            //  console.log('Some error occured during signing in: ', err);
-        }
-    };
+    }
+
     return(
         <React.Fragment>
            <Header />
@@ -46,11 +59,17 @@ function Login(){
                         <form>
                           <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Username</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></input>
+                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp"value={email}
+                            onChange={(event) => {
+                              setEmail(event.target.value);
+                            }}></input>
                           </div>
                           <div class="mb-4">
                             <label for="exampleInputPassword1" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1"></input>
+                            <input type="password" class="form-control" id="password"value={password}
+                            onChange={(event) => {
+                              setPassword(event.target.value);
+                            }}></input>
                           </div>
                           <div class="d-flex align-items-center justify-content-between mb-4">
                             <div class="form-check">
@@ -61,7 +80,7 @@ function Login(){
                             </div>
                             <a class="text-primary fw-bold" href="./index.html">Forgot Password ?</a>
                           </div>
-                          <a href="./index.html" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign In</a>
+                          <a  class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2" onClick={login}>Sign In</a>
                           <div class="d-flex align-items-center justify-content-center">
                             {/* <p class="fs-4 mb-0 fw-bold">New to Modernize?</p> */}
                             {/* <a class="text-primary fw-bold ms-2" href="./authentication-register.html">Create an account</a> */}
