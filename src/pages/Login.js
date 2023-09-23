@@ -3,6 +3,9 @@ import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 function Login(){
@@ -22,7 +25,8 @@ function Login(){
               
               if (res.data.message == "Email not exits") 
               {
-                alert("Email not exits");
+                toast.error('Email not exits',
+                      {position: toast.POSITION.TOP_RIGHT})
               } 
               else if(res.data.message == "Login Success")
               { 
@@ -30,9 +34,12 @@ function Login(){
               } 
                 else 
               { 
-                  alert("Incorrect Email and Password not match");
+                  toast.error('Incorrect Email and Password not match',
+                  {position: toast.POSITION.TOP_RIGHT})
               }
             }, fail => {
+              toast.error('ERROR',
+              {position: toast.POSITION.TOP_RIGHT})
             console.error(fail); // Error!
           });
       }catch (err) {
@@ -80,7 +87,7 @@ function Login(){
                             </div>
                             <a class="text-primary fw-bold" href="./index.html">Forgot Password ?</a>
                           </div>
-                          <a  class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2" onClick={login}>Sign In</a>
+                          <a class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2" onClick={login}>Sign In</a>
                           <div class="d-flex align-items-center justify-content-center">
                             {/* <p class="fs-4 mb-0 fw-bold">New to Modernize?</p> */}
                             {/* <a class="text-primary fw-bold ms-2" href="./authentication-register.html">Create an account</a> */}
