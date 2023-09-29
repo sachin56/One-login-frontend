@@ -4,86 +4,63 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import {toast} from 'react-toastify';
+import Nav from "../components/Navigation";
 import 'react-toastify/dist/ReactToastify.css';
 
 
 
+
 function Login(){
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const navigate = useNavigate();
-
-    async function login(event) {
-      event.preventDefault();
-      try {
-        await axios.post("http://localhost:8080/api/v1/employee/login", {
-          email: email,
-          password: password,
-          }).then((res) => 
-              {
-              console.log(res.data);
-              
-              if (res.data.message == "Email not exits") 
-              {
-                toast.error('Email not exits',
-                      {position: toast.POSITION.TOP_RIGHT})
-              } 
-              else if(res.data.message == "Login Success")
-              { 
-                  navigate('/dashboard');                 
-              } 
-                else 
-              { 
-                  toast.error('Incorrect Email and Password not match',
-                  {position: toast.POSITION.TOP_RIGHT})
-              }
-            }, fail => {
-              toast.error('ERROR',
-              {position: toast.POSITION.TOP_RIGHT})
-            console.error(fail); // Error!
-          });
-      }catch (err) {
-        alert(err);
-      }
-    
-    }
-
     return(
         <React.Fragment>
            <Header />
-           <div class="container">
-                <div class="box form-box">
-                <header>Sign Up</header>
-            <form action="" method="post">
-                <div class="field input">
-                    <label for="username">Username</label>
-                    <input type="text" name="username" id="username" autocomplete="off" required/>
+            <div className="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"data-sidebar-position="fixed" data-header-position="fixed">
+                <Nav/>
+                <div className="body-wrapper">
+                    <div className="container-fluid">
+                        <div className="box form-box">
+                        <form>
+                            <div className="row">
+                                <div className="form-group col-md-6">
+                                    <label htmlFor="inputEmail4">Name</label>
+                                    <input type="text" className="form-control" id="inputEmail4" placeholder="Name"/>
+                                </div>
+                                <div className="form-group col-md-6">
+                                    <label htmlFor="inputPassword4">Phone Number</label>
+                                    <input type="text" className="form-control" id="inputPassword4" placeholder="Phone Number"/>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="form-group col-md-6">
+                                    <label htmlFor="inputEmail4">Fedex ID</label>
+                                    <input type="text" className="form-control" id="inputEmail4" placeholder="Fedex ID"/>
+                                </div>
+                                <div className="form-group col-md-6">
+                                    <label htmlFor="inputPassword4">Email</label>
+                                    <input type="text" className="form-control" id="inputPassword4" placeholder="Email"/>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="form-group col-md-6">
+                                    <label htmlFor="inputPassword4">Password</label>
+                                    <input type="text" className="form-control" id="inputPassword4" placeholder="Password"/>
+                                </div>
+                            </div>
+                            <br></br>
+                            <button type="submit" className="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="field input">
-                    <label for="email">Email</label>
-                    <input type="text" name="email" id="email" autocomplete="off" required/>
-                </div>
-
-                <div class="field input">
-                    <label for="age">Age</label>
-                    <input type="number" name="age" id="age" autocomplete="off" required/>
-                </div>
-                <div class="field input">
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password" autocomplete="off" required/>
-                </div>
-
-                <div class="field">
-                    
-                    <input type="submit" class="btn" name="submit" value="Register" required/>
-                </div>
-                <div class="links">
-                    Already a member? <a href="index.php">Sign In</a>
-                </div>
-            </form>
-        </div>
-      </div>
+            </div>
+            <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+            <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="../assets/js/sidebarmenu.js"></script>
+            <script src="../assets/js/app.min.js"></script>
+            <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+            <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
+            <script src="../assets/js/dashboard.js"></script>
+            {/* <Footer /> */}
       </React.Fragment>
     )
 

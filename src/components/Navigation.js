@@ -12,8 +12,9 @@ function Navigation(){
                 <div>
                     <div class="brand-logo d-flex align-items-center justify-content-between">
                         <a href="./index.html" class="text-nowrap logo-img">
-                            <img src="../assets/images/logos/dark-logo.svg" width="180" alt="" />
+                            <img src="../assets/images/logos/lettero.png" width="30" alt="" />&nbsp;&nbsp;&nbsp;One Login
                         </a>
+
                         <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                             <i class="ti ti-x fs-8"></i>
                         </div>
@@ -34,7 +35,7 @@ function Navigation(){
                         </a>
                         </li>
                         <li class="sidebar-item">
-                        <a class="sidebar-link" href="./index.html" aria-expanded="false">
+                        <a class="sidebar-link" href="/user-add" aria-expanded="false">
                             <span>
                             <i class="ti ti-alert-circle"></i>
                             </span>
