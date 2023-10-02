@@ -14,6 +14,7 @@ function Useradd(){
     const [fedexid, setFedexID] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [table, setTable] = useState([]);
 
     const onSubmit = async () => {
         axios.post('http://localhost:8080/api/v1/employee/saveEmployee', {
@@ -32,7 +33,27 @@ function Useradd(){
                 {position: toast.POSITION.TOP_RIGHT})
           });
     }
+    const getData = () => {
+        axios
+            .get('http://localhost:8080/api/v1/employee/getAll')
+            .then((res) => {
+                setTable(res.data)
+            })
+    }
 
+    useEffect(() => {
+        getData();
+    }, []);
+
+    window.addEventListener("beforeunload", (event) => {
+        getData();
+        console.log("API call before page reload");
+    });
+
+    window.addEventListener("unload", (event) => {
+        getData();
+        console.log("API call after page reload");
+    });
     return(
         <React.Fragment>
            <Header />
@@ -102,12 +123,15 @@ function Useradd(){
                             </tr>
                         </thead>
                         <tbody>
+                        {table?.map(item =>(
                             <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
+                                
+                                <td scope="row">{item.id}</td>
+                                <td>{item.name}</td>
+                                <td>{item.email}</td>
+                                <td>{item.password}</td>
                             </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>
