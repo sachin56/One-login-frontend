@@ -35,7 +35,7 @@ function Navigation(){
                         </a>
                         </li>
                         <li class="sidebar-item">
-                        <a class="sidebar-link" href="/user-add" aria-expanded="false">
+                        <a class="sidebar-link" href="/useradd" aria-expanded="false">
                             <span>
                             <i class="ti ti-alert-circle"></i>
                             </span>
