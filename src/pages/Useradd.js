@@ -13,6 +13,7 @@ function Useradd(){
 
     const [table, setTable] = useState([]);
     const [show, setshow] = useState(false);
+    const [showdata, setShowdata] = useState([]);
     const navigate = useNavigate();
 
     const handleOpen = () =>{
@@ -20,6 +21,18 @@ function Useradd(){
     }
     const handleClose = () =>{
         setshow(false);
+    }
+
+    const onUpdate = async(id)=>{
+        console.log(id);
+          axios
+          .get('http://localhost:8080/api/v1/employee/searchEmployee/'+id)
+          .then((res) => {
+            setShowdata(res.data);
+            console.log(showdata.content.id);
+            handleOpen();
+          })
+        
     }
 
     const onDelete = async(id) =>{
@@ -64,7 +77,7 @@ function Useradd(){
            <Header />
             <div className="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"data-sidebar-position="fixed" data-header-position="fixed">
                 <Nav/>
-                <UserModal show={show} onClose={handleClose}/>
+                <UserModal show={show} onClose={handleClose} data={showdata}/>
                 <div className="body-wrapper">
                 <div class="container-fluid">
                     <div class="row">
@@ -110,10 +123,8 @@ function Useradd(){
                                                 <td>{item.name}</td>
                                                 <td>{item.email}</td>
                                                 <td>
-                                                <button class='btn btn-danger btn-sm delete'  title='Delete'onClick={()=>onDelete(item.id)}>Delete</button>
-                                                &nbsp;&nbsp;
-                                                <button class='btn btn-warning btn-sm delete'  title='Delete'>Update</button>
-                                                </td>
+                                                <button class='btn btn-danger btn-sm delete'  title='Delete' onClick={()=>onDelete(item.id)}>Delete</button>&nbsp;
+                                                <button class='btn btn-warning btn-sm'  title='Delete' onClick={()=>onUpdate(item.id)}>Update</button></td>
                                             </tr>
                                             ))}
                                         </tbody>

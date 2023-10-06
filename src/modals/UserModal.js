@@ -61,7 +61,7 @@ function Useradd(props){
                             type="text"
                             placeholder="Please Enter Name"
                             autoFocus
-                            valu={name}
+                            valu={props.showdata}
                             onChange={(event) => {
                                 setName(event.target.value);
                             }}
