@@ -15,6 +15,7 @@ function Useradd(){
     const [show, setshow] = useState(false);
     const [showdata, setShowdata] = useState([]);
     const navigate = useNavigate();
+    const[id,setID]=useState("")
 
     const handleOpen = () =>{
         setshow(true);
@@ -23,23 +24,17 @@ function Useradd(){
         setshow(false);
     }
 
-    const onUpdate = async(id)=>{
+    const onUpdate = (id)=>{
         console.log(id);
-          axios
-          .get('http://localhost:8080/api/v1/employee/searchEmployee/'+id)
-          .then((res) => {
-            setShowdata(res.data);
-            console.log(showdata.content.id);
-            handleOpen();
-          })
-        
+        setID(id)
+        handleOpen(); 
     }
 
     const onDelete = async(id) =>{
 
         console.log(id);
         try {
-            const response =  axios.delete('http://localhost:8080/api/v1/employee/deleteEmployee/'+id);
+            const response =  axios.delete('http://localhost:8090/api/v1/employee/deleteEmployee/'+id);
             toast.success('Data Deleted',
                 {position: toast.POSITION.TOP_RIGHT})
             navigate('/useradd');
@@ -77,7 +72,7 @@ function Useradd(){
            <Header />
             <div className="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"data-sidebar-position="fixed" data-header-position="fixed">
                 <Nav/>
-                <UserModal show={show} onClose={handleClose} data={showdata}/>
+                <UserModal show={show} onClose={handleClose} data={id}/>
                 <div className="body-wrapper">
                 <div class="container-fluid">
                     <div class="row">

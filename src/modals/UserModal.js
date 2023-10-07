@@ -14,19 +14,20 @@ import Form from 'react-bootstrap/Form';
 
 
 function Useradd(props){
-    const [name, setName] = useState("");
+    const [names, setName] = useState("");
     const [phonenumber, setPhoneNumber] = useState("");
     const [fedexid, setFedexID] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [table, setTable] = useState([]);
     const navigate = useNavigate();
+    const [showdata, setShowdata] = useState([]);
 
 
 
     const onSubmit = async () => {
-        axios.post('http://localhost:8080/api/v1/employee/saveEmployee', {
-            name: name,
+        axios.post('http://localhost:8090/api/v1/employee/saveEmployee', {
+            name: names,
             phonenumber: phonenumber,
             fedexid: fedexid,
             email: email,
@@ -44,6 +45,29 @@ function Useradd(props){
           });
     }
 
+    const Update = ()=>{
+        console.log(props.data.id);
+          axios
+          .get('http://localhost:8090/api/v1/employee/searchEmployee/'+props.data)
+          .then((res) => {
+            setShowdata(res.data);
+            console.log(showdata.content.id);
+          })
+        
+    }
+    // useEffect(() => {
+    //     Update();
+    // },[props.id]);
+
+    window.addEventListener("beforeunload", (event) => {
+        Update();
+        console.log("API call before page reload");
+    });
+
+    window.addEventListener("unload", (event) => {
+        Update();
+        console.log("API call after page reload");
+    });
 
     return(
         <React.Fragment>   
@@ -61,7 +85,7 @@ function Useradd(props){
                             type="text"
                             placeholder="Please Enter Name"
                             autoFocus
-                            valu={props.showdata}
+                            value={names}
                             onChange={(event) => {
                                 setName(event.target.value);
                             }}
