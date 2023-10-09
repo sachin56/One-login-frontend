@@ -17,7 +17,7 @@ function Login(){
     async function onSubmit(event) {
       event.preventDefault();
       try {
-        await axios.post("http://localhost:8080/api/v1/employee/login", {
+        await axios.post("http://localhost:8090/api/v1/employee/login", {
           email: email,
           password: password,
           }).then((res) => 
